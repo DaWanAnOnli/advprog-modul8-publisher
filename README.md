@@ -46,3 +46,13 @@ Pertama, program subscriber harus ada dalam keadaan running. Lalu, saat program 
 Penjelasan:
 Chart kedua di RabbitMQ (yang berwarna ungu) menunjukkan message rates, yaitu berapa banyak message yang dikirim dalam satu detik. Saat program publisher dijalankan, ada 5 messages yang dikirim sekaligus (hampir instan). RabbitMQ tidak mendeteksi 5 messages secara instan, namun didistribusikan dalam waktu 10 detik (lonjakannya berbentuk seperti segitiga). Dapat dilihat bahwa alas segitiga adalah 10 detik, dan tinggi segitiga adalah 1 message/detik. Maka dengan rumus segitiga, dapat dihitung jumlah message pada periode segititiga tersebut = (1/2) * (1 message / detik) * (10 detik) = 5 messages -- sesuai dengan program. Perhitungan yang serupa dapat dilakukan juga untuk lonjakan yang berbentuk trapezium.
 
+
+
+
+
+![image](https://github.com/DaWanAnOnli/advprog-modul8-publisher/assets/124868777/e6ececff-4efb-43da-adbb-85e5caa1fc37)
+
+Penjelasan:
+Saya menjalankan cargo run 7 kali berturut-turut di console publisher saya. Kali ini, subscriber tidak bisa menerima setiap message sekaligus, karena ada jeda 10 ms dalam menerima message. Alhasil dalam beberapa detik pertama queue meningkat drastis, karena penambahan jumlah message yang dikirim (dengan cargo run pada publisher) lebih banyak dari jumlah message yang diterima (diambil dari queue oleh subscriber). Queue mencapai maksimum antara 20 dan 30 (kita anggap 25). Mengapa tidak 35? Padahal publishe di run sebanyak 7 kali, masing-masing dengan 5 message. Hal ini karena sudah ada beberapa message yang diterim publisher, sehingga yang tersimpan dalam queue tidak mencapai 35. Setelah titik tersebut subscriber mengambil message dari queue secara perlahan tapi pasti (1 message per 10 ms).
+
+
