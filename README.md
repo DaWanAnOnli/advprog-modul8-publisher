@@ -36,3 +36,13 @@ Console Subscriber:
 
 Penjelasan:
 Pertama, program subscriber harus ada dalam keadaan running. Lalu, saat program publisher di run, publisher akan mengirim 5 pesan ke subscriber. Pesan yang diterima oleh subscriber akan diterima oleh subscriber dan diproses oleh function handle. Function ini akan mem-print message yang diterima ke console, sehingga muncul kelima pesan di console subscriber. Ini adalah contoh dari bagaimana dua project yang berbeda dapat berkomunikasi menggunakan broker AMQP. Hal ini akan membantu dalam integrasi modul-modul pada aplikasi yang besar.
+
+
+
+
+
+![image](https://github.com/DaWanAnOnli/advprog-modul8-publisher/assets/124868777/d1602c12-29de-4608-adec-e76cc2ccc234)
+
+Penjelasan:
+Chart kedua di RabbitMQ (yang berwarna ungu) menunjukkan message rates, yaitu berapa banyak message yang dikirim dalam satu detik. Saat program publisher dijalankan, ada 5 messages yang dikirim sekaligus (hampir instan). RabbitMQ tidak mendeteksi 5 messages secara instan, namun didistribusikan dalam waktu 10 detik (lonjakannya berbentuk seperti segitiga). Dapat dilihat bahwa alas segitiga adalah 10 detik, dan tinggi segitiga adalah 1 message/detik. Maka dengan rumus segitiga, dapat dihitung jumlah message pada periode segititiga tersebut = (1/2) * (1 message / detik) * (10 detik) = 5 messages -- sesuai dengan program. Perhitungan yang serupa dapat dilakukan juga untuk lonjakan yang berbentuk trapezium.
+
