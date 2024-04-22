@@ -56,3 +56,10 @@ Penjelasan:
 Saya menjalankan cargo run 7 kali berturut-turut di console publisher saya. Kali ini, subscriber tidak bisa menerima setiap message sekaligus, karena ada jeda 10 ms dalam menerima message. Alhasil dalam beberapa detik pertama queue meningkat drastis, karena penambahan jumlah message yang dikirim (dengan cargo run pada publisher) lebih banyak dari jumlah message yang diterima (diambil dari queue oleh subscriber). Queue mencapai maksimum antara 20 dan 30 (kita anggap 25). Mengapa tidak 35? Padahal publishe di run sebanyak 7 kali, masing-masing dengan 5 message. Hal ini karena sudah ada beberapa message yang diterim publisher, sehingga yang tersimpan dalam queue tidak mencapai 35. Setelah titik tersebut subscriber mengambil message dari queue secara perlahan tapi pasti (1 message per 10 ms).
 
 
+![image](https://github.com/DaWanAnOnli/advprog-modul8-publisher/assets/124868777/56cb24c7-23a2-4525-84c8-563a623b0e8a)
+
+Penjelasan:
+Sekarang saya menggunakan 5 subscribers yang berjalan di waktu yang sama. Oleh karena itu, message yang dikirim publisher akan didistribusikan dengan rata antara subscriber-subscriber yang ada. Dapat dibilang bahwa sistem 5 subscribers dapat menghandle 5 messages per 10 ms, karena delay per message tetap 10 ms. Saya tetap menjalankan cargo run sebanyak 7 kali untuk publisher. Dapat dilihat penumpukan queue yang lebih sedikit daripada sebelumnya, yang tadinya terdapat maksimum 25 antrian, sekarang hanya 10 antrian. Pengurangan jumlah antrian juga terjadi lebih cepat daripada kasus sebelumnya yang hanya menggunakan satu subscriber.
+
+
+
